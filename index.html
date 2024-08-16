@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop At The Time!</title>
+  <style>
+  body{
+  overflow: hidden;
+  margin: 0;
+  background-color:#fffafa;
+  }
+  *{
+  margin: 0
+  }
+  #sensor{
+  background-color: greenyellow;
+  width:100vw;
+  height:100vh;
+  display:none;
+  }
+  #panel{
+  width: 100vw;
+  height: 100vh;
+  }
+  h1{
+  text-align: center;
+  }
+  #input{
+  width:100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  }
+  #startBtn{
+  color:white;
+  background-color: black;
+  width:20vw;
+  height:20vw;
+  border-radius: 50%;
+  align-content: center;
+  text-align: center;
+  }
+  </style>
+</head>
+<body>
+  <div id="panel">
+    <h1>
+      Stop At The Time!
+    </h1>
+    <div id="input">
+      <input id="inputDiv" type="text" placeholder="Write the time (second)">
+      <div id="startBtn" onclick="getValue()">START</div>
+    </div>
+  </div>
+  <div id="sensor"></div>
+<script>
+  alert("touchscreen only")
+  let input = document.getElementById("inputDiv")
+  let startBtn = document.getElementById("startBtn")
+  let panel = document.getElementById("panel")
+  let sensor = document.getElementById("sensor")
+  let intervalid, currentTime = 0;
+  let inputBuffer;
+  
+  function getValue(){
+    let inputValue = input.value
+    inputValue = parseInt(inputValue)
+    if(isNaN(inputValue)){
+      alert("masukkan angka, bukan huruf")
+      input.value = ""
+    } else{
+      inputBuffer = inputValue
+      input.value = ""
+      panel.style.display = "none"
+      sensor.style.display = "block"
+    }
+  }
+
+sensor.addEventListener("touchstart", e => {
+  sensor.style.backgroundColor = "yellow"
+  intervalid = setInterval(() => {
+    currentTime++
+  }, 1000)
+})
+sensor.addEventListener("touchend", e=> {
+  clearInterval(intervalid)
+  sensor.style.backgroundColor = "greenyellow"
+  sensor.style.display = "none"
+  panel.style.display = "block"
+  result(currentTime)
+  currentTime = 0
+})
+  
+function result(currentTime){
+  let score = Math.abs(inputBuffer - currentTime)
+  alert("Submitted time = " + inputBuffer + "\nYour time = " + currentTime + "\ntime difference = " + score)
+}
+  </script>
+</body>
+</html>
