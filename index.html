@@ -25,6 +25,7 @@
   }
   h1{
   text-align: center;
+  font-family: "arial black";
   }
   #input{
   width:100%;
@@ -69,7 +70,7 @@
     let inputValue = input.value
     inputValue = parseInt(inputValue)
     if(isNaN(inputValue)){
-      alert("masukkan angka, bukan huruf")
+      alert("Write a number, not other than that")
       input.value = ""
     } else{
       inputBuffer = inputValue
